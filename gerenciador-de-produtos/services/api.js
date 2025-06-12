@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3000/products'
 
 //GET
 
-export const getProducts = ()=> fetch(BASE_URL).then(res => res.json)
+export const getProducts = ()=> fetch(BASE_URL).then(res => res.json())
 
 //POST
 
@@ -30,6 +30,6 @@ export const updateProduct = (product) =>
 
 export const deleteProduct = (id) =>{
     return fetch(`${BASE_URL}/${id}`,{
-        method:'DELETE '
+        method:'DELETE'
     })
 }

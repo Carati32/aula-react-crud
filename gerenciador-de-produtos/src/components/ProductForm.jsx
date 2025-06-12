@@ -1,16 +1,31 @@
-import { use, useState } from "react"
+import { use, useEffect, useState } from "react"
 
-export default function ProductForm({selectedProduct}){
+export default function ProductForm({selectedProduct,onSave}){
     const [name,setName] = useState ('')
     
     const [price,setPrice] = useState ('')
 
+    useEffect(()=>{
+        if(selectedProduct){
+            setName(selectedProduct.name)
+            setPrice(selectedProduct.price)
+        }else{
+            setName('')
+            setPrice('')
+        }
+    },[selectedProduct])
+
     const handleSubmit = (e)=>{
         e.preventDefault()
+        onSave({
+            id:selectedProduct?.id,
+            name,
+            price:parseFloat(price)
+        })
     }
 
     return(
-        <form omSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 placeholder="Nome do Produto"
